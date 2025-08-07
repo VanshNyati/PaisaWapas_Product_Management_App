@@ -118,20 +118,25 @@ const EditProduct = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Edit Product</h2>
-            <p className="text-gray-600">Update the product details below.</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+              Edit Product
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">
+              Update the product details below.
+            </p>
           </div>
-
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Product Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Product Name *
               </label>
               <input
@@ -141,23 +146,27 @@ const EditProduct = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="Enter product name"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
-                  errors.name ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                  errors.name ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.name && (
                 <p className="mt-1 text-sm text-red-600">{errors.name}</p>
               )}
             </div>
-
             {/* Price */}
             <div>
-              <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Price (₹) *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span className="text-gray-500 text-lg">₹</span>
+                  <span className="text-gray-500 dark:text-gray-400 text-lg">
+                    ₹
+                  </span>
                 </div>
                 <input
                   id="price"
@@ -168,8 +177,8 @@ const EditProduct = () => {
                   value={formData.price}
                   onChange={handleChange}
                   placeholder="0.00"
-                  className={`w-full pl-8 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
-                    errors.price ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full pl-8 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                    errors.price ? "border-red-500" : "border-gray-300"
                   }`}
                 />
               </div>
@@ -177,10 +186,12 @@ const EditProduct = () => {
                 <p className="mt-1 text-sm text-red-600">{errors.price}</p>
               )}
             </div>
-
             {/* Category */}
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="category"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Category *
               </label>
               <select
@@ -188,8 +199,8 @@ const EditProduct = () => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
-                  errors.category ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                  errors.category ? "border-red-500" : "border-gray-300"
                 }`}
               >
                 <option value="">Select a category</option>
@@ -203,10 +214,12 @@ const EditProduct = () => {
                 <p className="mt-1 text-sm text-red-600">{errors.category}</p>
               )}
             </div>
-
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+              >
                 Description (Optional)
               </label>
               <textarea
@@ -216,21 +229,22 @@ const EditProduct = () => {
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Describe your product... (optional)"
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none ${
-                  errors.description ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 ${
+                  errors.description ? "border-red-500" : "border-gray-300"
                 }`}
               />
               {errors.description && (
-                <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.description}
+                </p>
               )}
             </div>
-
             {/* Submit Button */}
             <div className="flex space-x-4 pt-4">
               <button
                 type="button"
                 onClick={() => navigate("/")}
-                className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium"
+                className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 font-medium"
               >
                 Cancel
               </button>

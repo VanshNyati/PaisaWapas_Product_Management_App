@@ -95,11 +95,11 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl w-full mx-auto px-2 sm:px-4 lg:px-8 py-4 sm:py-8">
         {/* Search and Filter Section */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6 mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 sm:p-6 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            {/* Search */}
             <div className="flex-1 w-full">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -116,56 +116,61 @@ const Products = () => {
                 />
               </div>
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="relative">
-                <select
-                  value={sort}
-                  onChange={handleSort}
-                  className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-3 pr-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-gray-900 dark:text-gray-100"
-                >
-                  <option value="">Sort by Price {getSortIcon()}</option>
-                  <option value="asc">Price: Low to High ↑</option>
-                  <option value="desc">Price: High to Low ↓</option>
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+
+            {/* Sort, View, and Count */}
+            <div className="flex flex-row flex-wrap items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
+              {/* Sort */}
+              <select
+                value={sort}
+                onChange={handleSort}
+                className="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+              >
+                <option value="asc">Price: Low to High ↑</option>
+                <option value="desc">Price: High to Low ↓</option>
+              </select>
+
+              {/* View Mode Buttons */}
+              <div className="flex items-center space-x-2">
+                <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setViewMode("grid")}
+                    className={`px-3 py-2 text-sm focus:outline-none ${
+                      viewMode === "grid"
+                        ? "bg-blue-600 text-white"
+                        : "bg-transparent text-gray-700 dark:text-gray-300"
+                    }`}
+                    aria-label="Grid view"
+                  >
+                    {/* grid icon */}
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`px-3 py-2 text-sm focus:outline-none ${
+                      viewMode === "list"
+                        ? "bg-blue-600 text-white"
+                        : "bg-transparent text-gray-700 dark:text-gray-300"
+                    }`}
+                    aria-label="List view"
+                  >
+                    {/* list icon */}
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path
+                        fillRule="evenodd"
+                        d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
 
-              {/* View Mode Toggle */}
-              <div className="flex items-center space-x-2 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === "grid" 
-                      ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm" 
-                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
-                  }`}
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setViewMode("list")}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    viewMode === "list" 
-                      ? "bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400 shadow-sm" 
-                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
-                  }`}
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                {products.length} product{products.length !== 1 ? 's' : ''} found
-              </div>
+              {/* Products Count */}
+              <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 ml-2 sm:ml-4 whitespace-nowrap font-semibold">
+                {products.length} products found
+              </span>
             </div>
           </div>
         </div>
@@ -178,28 +183,45 @@ const Products = () => {
         ) : products.length === 0 ? (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">📦</div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">No products found</h3>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              No products found
+            </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              {search ? `No products match "${search}"` : "Get started by adding your first product"}
+              {search
+                ? `No products match "${search}"`
+                : "Get started by adding your first product"}
             </p>
             {!search && (
               <a
                 href="/add"
                 className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
                 </svg>
                 Add Your First Product
               </a>
             )}
           </div>
         ) : (
-          <div className={viewMode === "grid" 
-            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-            : "space-y-4"
-          }>
-            {products.map((product) => (
+          <div
+            className={
+              viewMode === "grid"
+                ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
+                : "space-y-4"
+            }
+          >
+            {products.map((product) =>
               viewMode === "grid" ? (
                 <ProductCard
                   key={product._id}
@@ -207,12 +229,9 @@ const Products = () => {
                   onDelete={handleDelete}
                 />
               ) : (
-                <ListProductItem
-                  key={product._id}
-                  product={product}
-                />
+                <ListProductItem key={product._id} product={product} />
               )
-            ))}
+            )}
           </div>
         )}
       </div>
